@@ -38,6 +38,8 @@ public class GameSettingsService : MonoBehaviour
 	public BooleanSetting				SrpBatcher			= new ( "SrpBatcher", false);					
 	public BooleanSetting				DynamicBatcher		= new ( "DynamicBatcher", false);					
 	public BooleanSetting				PostProcessing		= new ( "PostProcessing", false );
+	public BooleanSetting				DevelopMode			= new ( "DevelopMode", false );
+	
 	
 	[Category("Display")]
 	public BooleanSetting				ShowFps				= new ( "ShowFps", false );
