@@ -1,7 +1,7 @@
 {
   "name": "com.flexy.gamesettings",
   "displayName": "Flexy Game Settings",
-  "version": "2.0.0",
+  "version": "22.0.0",
   "unity": "2022.3",
   "description": "Easy to use game settings system",
   "keywords": [
