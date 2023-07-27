@@ -9,7 +9,9 @@
   ],
   "category": "Utils",
   "author": {
-    "name": "Flexy.Tools"
+    "name": "Flexy Tools",
+    "email" : "JesObertyukh@gmail.com",
+    "url" : "https://github.com/FlexyTools/Flexy.GameSettings"
   },
   "samples": [
     {
