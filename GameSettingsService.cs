@@ -19,8 +19,10 @@
 		public static SerializerImpl _serializerImpl;
 		public static SerializerImpl Serializer => _serializerImpl ??= new SerializerImpl( );
 		
-		[Category("Text")]
-		public EnumSetting<SystemLanguage>	Locale				= new ( "Locale", Application.systemLanguage );
+		//Forbidden to call Unity from field initializer
+		//Game locale - its not device locale, but locale from Flexy Localization
+		//[Category("Text")]
+		//public EnumSetting<SystemLanguage>	Locale				= new ( "Locale", Application.systemLanguage ); 
 
 		// [Category("Input")]
 		// public SingleSetting		FistPersonSensivity		= new ( "FPSensivity"			, 0.5f );
