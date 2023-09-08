@@ -6,7 +6,7 @@ public struct Int32Setting
 	{
 		_key     = "Flexy.GameSettings  Int " + key;
 		_default = defaultValue;
-		_value   = GameSettingsService.Serializer.GetInt(_key, _default);
+		_value   = GameSettings.Serializer.GetInt(_key, _default);
 		Changed  = null;
 	}
 
@@ -16,7 +16,7 @@ public struct Int32Setting
 	
 	public event Action<Int32> Changed;
 
-	public Boolean HasValue => GameSettingsService.Serializer.HasKey( _key );
+	public Boolean HasValue => GameSettings.Serializer.HasKey( _key );
 
 	public Int32 Get	( )
 	{ 
@@ -28,7 +28,7 @@ public struct Int32Setting
 			return;
 
 		_value = value;
-		GameSettingsService.Serializer.SetInt(_key, value);
+		GameSettings.Serializer.SetInt(_key, value);
 
 		try						{ Changed?.Invoke( value ); }
 		catch (Exception ex)	{ Debug.LogException( ex ); }

@@ -8,7 +8,7 @@ public		struct EnumSetting<T> where T: Enum, IComparable
 	{
 		_key        = $"Flexy.GameSettings  Enum {typeof(T).Name} " + key;
 		_default    = defaultValue;
-		_value      = Union.VtoT( GameSettingsService.Serializer.GetInt(_key, Union.TtoV( defaultValue )) );
+		_value      = Union.VtoT( GameSettings.Serializer.GetInt(_key, Union.TtoV( defaultValue )) );
 		Changed		= null;
 	}
 
@@ -16,7 +16,7 @@ public		struct EnumSetting<T> where T: Enum, IComparable
 	private	T		_default;
 	private	T		_value;
 	
-	public	Boolean	HasValue => GameSettingsService.Serializer.HasKey( _key );
+	public	Boolean	HasValue => GameSettings.Serializer.HasKey( _key );
 
 	public event	Action<T> Changed;
 	
@@ -30,7 +30,7 @@ public		struct EnumSetting<T> where T: Enum, IComparable
 			return;
 
 		_value = value;
-		GameSettingsService.Serializer.SetInt( _key, Union.TtoV(value) );
+		GameSettings.Serializer.SetInt( _key, Union.TtoV(value) );
 
 		try						{ Changed?.Invoke( value ); }
 		catch (Exception ex)	{ Debug.LogException( ex ); }

@@ -6,7 +6,7 @@ public struct StringSetting
 	{
 		_key     = key;
 		_default = defaultValue;
-		_value   = GameSettingsService.Serializer.GetString(_key, _default);
+		_value   = GameSettings.Serializer.GetString(_key, _default);
 		Changed  = null;
 	}
 
@@ -16,7 +16,7 @@ public struct StringSetting
 	
 	public event Action<String> Changed;
 
-	public Boolean HasValue => GameSettingsService.Serializer.HasKey( _key );
+	public Boolean HasValue => GameSettings.Serializer.HasKey( _key );
 
 	public String Get	( )
 	{ 
@@ -28,7 +28,7 @@ public struct StringSetting
 			return;
 		
 		_value = value;
-		GameSettingsService.Serializer.SetString(_key, value);
+		GameSettings.Serializer.SetString(_key, value);
 
 		try						{ Changed?.Invoke( value ); }
 		catch (Exception ex)	{ Debug.LogException( ex ); }

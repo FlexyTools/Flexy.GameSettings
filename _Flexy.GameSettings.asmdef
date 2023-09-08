@@ -1,7 +1,9 @@
 {
     "name": "Flexy.GameSettings",
     "rootNamespace": "Flexy.GameSettings",
-    "references": [],
+    "references": [
+        "GUID:0a6f55c097a4830479448868e3413cf9"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
@@ -9,6 +11,12 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.flexy.gameworld",
+            "expression": "22",
+            "define": "FLEXY_GAMEWORLD"
+        }
+    ],
     "noEngineReferences": false
 }

@@ -6,7 +6,7 @@ public struct SingleSetting
 	{
 		_key     = key;
 		_default = defaultValue;
-		_value   = GameSettingsService.Serializer.GetFloat(_key, _default);
+		_value   = GameSettings.Serializer.GetFloat(_key, _default);
 		Changed  = null;
 	}
 
@@ -16,7 +16,7 @@ public struct SingleSetting
 	
 	public event Action<Single> Changed;
 
-	public Boolean HasValue => GameSettingsService.Serializer.HasKey( _key );
+	public Boolean HasValue => GameSettings.Serializer.HasKey( _key );
 
 	public Single Get	( )
 	{ 
@@ -28,7 +28,7 @@ public struct SingleSetting
 			return;
 
 		_value = value;
-		GameSettingsService.Serializer.SetFloat(_key, value);
+		GameSettings.Serializer.SetFloat(_key, value);
 		
 		try						{ Changed?.Invoke( value ); }
 		catch (Exception ex)	{ Debug.LogException( ex ); }

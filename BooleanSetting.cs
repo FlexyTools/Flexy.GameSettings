@@ -5,7 +5,7 @@ public struct BooleanSetting
 	public BooleanSetting (String key, Boolean defaultValue)
 	{
 		_key     = "Flexy.GameSettings  Boolean " + key;
-		_value   = GameSettingsService.Serializer.GetBool(_key, defaultValue );
+		_value   = GameSettings.Serializer.GetBool(_key, defaultValue );
 		Changed  = null;
 	}
 
@@ -14,7 +14,7 @@ public struct BooleanSetting
 	
 	public event Action<Boolean> Changed;
 
-	public Boolean HasValue => GameSettingsService.Serializer.HasKey( _key );
+	public Boolean HasValue => GameSettings.Serializer.HasKey( _key );
 
 	public Boolean Get	( )
 	{ 
@@ -26,7 +26,7 @@ public struct BooleanSetting
 			return;
 
 		_value = value;
-		GameSettingsService.Serializer.SetBool(_key, value );
+		GameSettings.Serializer.SetBool(_key, value );
 
 		try						{ Changed?.Invoke( value ); }
 		catch (Exception ex)	{ Debug.LogException( ex ); }
