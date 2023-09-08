@@ -10,6 +10,6 @@ namespace Flexy.GameSettings
 			
 			world.SetService( settings );
 		}
-		}
+	}
 }
 #endif

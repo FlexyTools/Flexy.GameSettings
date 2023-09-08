@@ -1,8 +1,10 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using Unity.Collections.LowLevel.Unsafe;
 
 namespace Flexy.GameSettings;
 
-public		struct EnumSetting<T> where T: Enum, IComparable
+public		struct EnumSetting<T> where T: unmanaged, Enum, IComparable
 {
 	public EnumSetting ( String key, T defaultValue )
 	{
@@ -38,11 +40,16 @@ public		struct EnumSetting<T> where T: Enum, IComparable
 
 	public static	implicit operator T ( EnumSetting<T> @this ) => @this._value;
 	
-	[StructLayout(LayoutKind.Explicit, Pack = 0)]
 	private struct Union
 	{
-		[FieldOffset(0)] public Int32	Value;
-		[FieldOffset(0)] public T		Enum;
+		public T		Enum;
+		private Int32	_dummy; // need this for proper struct padding to 4 bytes so then unsafe convert will work properly
+		
+		public Int32	Value
+		{
+			get => UnsafeUtility.As<T,Int32>( ref Enum );
+			set => Enum = UnsafeUtility.As<Int32, T>( ref value );
+		}
 		
 		public static Int32	TtoV( T t )		=> new Union { Enum	 = t }.Value;
 		public static T		VtoT( Int32 v )	=> new Union { Value = v }.Enum;
