@@ -1,7 +1,7 @@
-﻿#if FLEXY_GAMEWORLD
+﻿
 namespace Flexy.GameSettings
 {
-	public class GameSettingsService : GameWorlds.ServiceProvider
+	public class GameSettingsServiceProvider : GameWorlds.ServiceProvider
 	{
 		public override void ProvideServices( GameWorlds.GameWorld world )
 		{
@@ -12,4 +12,3 @@ namespace Flexy.GameSettings
 		}
 	}
 }
-#endif
