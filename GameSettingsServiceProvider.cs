@@ -1,14 +1,15 @@
-﻿
+﻿using Flexy.GameWorlds;
+
 namespace Flexy.GameSettings
 {
-	public class GameSettingsServiceProvider : GameWorlds.ServiceProvider
+	public class GameSettingsServiceProvider : ServiceProvider
 	{
-		public override void ProvideServices( GameWorlds.GameWorld world )
+		public override void ProvideServices( GameContext ctx )
 		{
 			var settings = new GameSettings( );
 			settings.Init( );
 			
-			world.SetService( settings );
+			ctx.SetService( settings );
 		}
 	}
 }
