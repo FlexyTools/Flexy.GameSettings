@@ -2,7 +2,8 @@
     "name": "Flexy.GameSettings",
     "rootNamespace": "Flexy.GameSettings",
     "references": [
-        "GUID:0a6f55c097a4830479448868e3413cf9"
+        "GUID:0a6f55c097a4830479448868e3413cf9",
+        "GUID:0500b42cb82258245a8ba6d879e1c446"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

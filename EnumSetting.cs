@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Flexy.Utils;
 using Unity.Collections.LowLevel.Unsafe;
 
 namespace Flexy.GameSettings;
@@ -10,7 +11,7 @@ public		struct EnumSetting<T> where T: unmanaged, Enum, IComparable
 	{
 		_key        = $"Flexy.GameSettings  Enum {typeof(T).Name} " + key;
 		_default    = defaultValue;
-		_value      = Union.VtoT( GameSettings.Serializer.GetInt(_key, Union.TtoV( defaultValue )) );
+		_value      = EnumUnion.VtoT<T>( GameSettings.Serializer.GetInt(_key, EnumUnion.TtoV( defaultValue )) );
 		Changed		= null;
 	}
 
@@ -32,26 +33,11 @@ public		struct EnumSetting<T> where T: unmanaged, Enum, IComparable
 			return;
 
 		_value = value;
-		GameSettings.Serializer.SetInt( _key, Union.TtoV(value) );
+		GameSettings.Serializer.SetInt( _key, EnumUnion.TtoV(value) );
 
 		try						{ Changed?.Invoke( value ); }
 		catch (Exception ex)	{ Debug.LogException( ex ); }
 	}
 
 	public static	implicit operator T ( EnumSetting<T> @this ) => @this._value;
-	
-	private struct Union
-	{
-		public T		Enum;
-		private Int32	_dummy; // need this for proper struct padding to 4 bytes so then unsafe convert will work properly
-		
-		public Int32	Value
-		{
-			get => UnsafeUtility.As<T,Int32>( ref Enum );
-			set => Enum = UnsafeUtility.As<Int32, T>( ref value );
-		}
-		
-		public static Int32	TtoV( T t )		=> new Union { Enum	 = t }.Value;
-		public static T		VtoT( Int32 v )	=> new Union { Value = v }.Enum;
-	}
 }
