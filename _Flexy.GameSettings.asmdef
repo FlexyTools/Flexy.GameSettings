@@ -13,12 +13,6 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [
-        {
-            "name": "com.flexy.gameworld",
-            "expression": "22",
-            "define": "FLEXY_GAMEWORLD"
-        }
-    ],
+    "versionDefines": [],
     "noEngineReferences": false
 }
