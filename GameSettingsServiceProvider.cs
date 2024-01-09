@@ -1,6 +1,4 @@
-﻿using Flexy.GameWorlds;
-
-namespace Flexy.GameSettings
+﻿namespace Flexy.GameSettings
 {
 	public class GameSettingsServiceProvider : ServiceProvider
 	{

@@ -3,7 +3,8 @@
     "rootNamespace": "Flexy.GameSettings",
     "references": [
         "GUID:0a6f55c097a4830479448868e3413cf9",
-        "GUID:0500b42cb82258245a8ba6d879e1c446"
+        "GUID:0500b42cb82258245a8ba6d879e1c446",
+        "GUID:8f8cd9da846c03a4e94c08df4d8e4e10"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
