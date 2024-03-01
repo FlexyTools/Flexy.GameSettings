@@ -1,7 +1,7 @@
 {
-  "name": "com.flexy.gamesettings",
+  "name": "fun.flexy.gamesettings",
   "displayName": "Flexy Game Settings",
-  "version": "22.0.0",
+  "version": "5.0.0",
   "unity": "2022.3",
   "description": "Easy to use game settings system",
   "keywords": [
@@ -12,12 +12,5 @@
     "name": "Flexy Tools",
     "email" : "JesObertyukh@gmail.com",
     "url" : "https://github.com/FlexyTools/Flexy.GameSettings"
-  },
-  "samples": [
-    {
-      "displayName": "Unity project",
-      "description": "Contains Unity project for Flexy.Utils",
-      "path": "Samples~/UnityProj"
-    }
-  ]
+  }
 }
