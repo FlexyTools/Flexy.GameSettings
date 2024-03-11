@@ -79,12 +79,9 @@
 			//((UniversalRenderPipelineAsset)GraphicsSettings.renderPipelineAsset).msaaSampleCount = Msaa;
 
 			//QualitySettings.maximumLODLevel		= MaxLodLevel;
-			#if UNITY_2022_2_OR_NEWER
-				QualitySettings.globalTextureMipmapLimit		= Mathf.Max((Int32) MaxTextureLimit(),(Int32)TextureQuality.Get(  ));
-			#else 
-				QualitySettings.masterTextureLimit	= Mathf.Max((Int32) MaxTextureLimit(),(Int32)TextureQuality.Get(  ));
-			#endif
-			QualitySettings.anisotropicFiltering = AnisotropicFiltering.Get(  );
+			
+			QualitySettings.globalTextureMipmapLimit	= Mathf.Max((Int32) MaxTextureLimit(),(Int32)TextureQuality.Get(  ));
+			QualitySettings.anisotropicFiltering		= AnisotropicFiltering.Get(  );
 		}
 		private void						ApplyApplicationChange		( )	
 		{
