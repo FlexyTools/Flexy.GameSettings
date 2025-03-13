@@ -6,7 +6,7 @@ public struct StringSetting
 	{
 		_key     = key;
 		_default = defaultValue;
-		_value   = GameSettings.Serializer.GetString(_key, _default);
+		_value   = GSS.Serializer.GetString(_key, _default);
 		Changed  = null;
 	}
 
@@ -16,7 +16,7 @@ public struct StringSetting
 	
 	public event Action<String> Changed;
 
-	public Boolean HasValue => GameSettings.Serializer.HasKey( _key );
+	public Boolean HasValue => GSS.Serializer.HasKey( _key );
 
 	public String Get	( )
 	{ 
@@ -28,11 +28,12 @@ public struct StringSetting
 			return;
 		
 		_value = value;
-		GameSettings.Serializer.SetString(_key, value);
+		GSS.Serializer.SetString(_key, value);
 
 		try						{ Changed?.Invoke( value ); }
 		catch (Exception ex)	{ Debug.LogException( ex ); }
 	}
+	public void Clear() => Set( _default );
 
 	public static	implicit operator String ( StringSetting @this ) => @this._value;
 }

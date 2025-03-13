@@ -1,17 +1,14 @@
-﻿using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using Flexy.Utils;
-using Unity.Collections.LowLevel.Unsafe;
+﻿using Flexy.Utils;
 
 namespace Flexy.GameSettings;
 
-public		struct EnumSetting<T> where T: unmanaged, Enum, IComparable
+public		struct EnumSetting<T> : IClearable where T: unmanaged, Enum, IComparable
 {
 	public EnumSetting ( String key, T defaultValue )
 	{
 		_key        = $"Flexy.GameSettings  Enum {typeof(T).Name} " + key;
 		_default    = defaultValue;
-		_value      = EnumUnion.VtoT<T>( GameSettings.Serializer.GetInt(_key, EnumUnion.TtoV( defaultValue )) );
+		_value      = EnumUnion.VtoT<T>( GSS.Serializer.GetInt(_key, EnumUnion.TtoV( defaultValue )) );
 		Changed		= null;
 	}
 
@@ -19,7 +16,7 @@ public		struct EnumSetting<T> where T: unmanaged, Enum, IComparable
 	private	T		_default;
 	private	T		_value;
 	
-	public	Boolean	HasValue => GameSettings.Serializer.HasKey( _key );
+	public	Boolean	HasValue => GSS.Serializer.HasKey( _key );
 
 	public event	Action<T> Changed;
 	
@@ -33,11 +30,13 @@ public		struct EnumSetting<T> where T: unmanaged, Enum, IComparable
 			return;
 
 		_value = value;
-		GameSettings.Serializer.SetInt( _key, EnumUnion.TtoV(value) );
+		GSS.Serializer.SetInt( _key, EnumUnion.TtoV(value) );
 
 		try						{ Changed?.Invoke( value ); }
 		catch (Exception ex)	{ Debug.LogException( ex ); }
 	}
+	public void Clear() => Set( _default );
 
 	public static	implicit operator T ( EnumSetting<T> @this ) => @this._value;
 }
+public interface IClearable{ public void Clear( ); }
