@@ -61,8 +61,8 @@
 					case BooleanSetting s:	s.Clear( ); break;
 					case Int32Setting s:	s.Clear( ); break;
 					case SingleSetting s:	s.Clear( ); break;
-					case IClearable s:		s.Clear( ); break;
 					case StringSetting s:	s.Clear( ); break;
+					case IClearable s:		s.Clear( ); break;
 				}
 			}
 		}
