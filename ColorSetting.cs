@@ -35,5 +35,6 @@ public struct ColorSetting : IClearable
 		catch (Exception ex)	{ Debug.LogException( ex ); }
 	}
 	
-	public static	implicit operator Color32 ( ColorSetting @this ) => @this._value;
+	public static	implicit operator Color32	( ColorSetting @this ) => @this._value;
+	public static	implicit operator Color		( ColorSetting @this ) => @this._value;
 }
