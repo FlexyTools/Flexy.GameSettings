@@ -1,65 +1,53 @@
-﻿namespace Flexy.GameSettings;
+﻿using System.Runtime.InteropServices;
 
-public		struct EnumSetting<T> : IClearable where T: unmanaged, Enum, IComparable
+namespace Flexy.GameSettings;
+
+public	struct Enum32Setting<T> : IClearable where T: unmanaged, Enum, IComparable
 {
-	public EnumSetting ( String key, T defaultValue )
+	public Enum32Setting ( String key, T defaultValue )
 	{
-		var isInt64 = Enum.GetUnderlyingType(typeof(T)) == typeof(Int64);
-
 		_key        = $"Flexy.GameSettings  Enum {typeof(T).Name} " + key;
 		_default    = defaultValue;
 		Changed		= null;
-		
-		if (isInt64)
-		{
-			var raw		= EnumUnion.TtoV64( defaultValue );
-			_value      = EnumUnion.VtoT<T>(	
-							(Int64)SGS.Serializer.GetInt(_key+"_Low", (Int32)raw) |
-							(Int64)SGS.Serializer.GetInt(_key+"_High", (Int32)(raw>>32) ) << 32
-						);
-		}
-		else
-		{
-			_value      = EnumUnion.VtoT<T>( SGS.Serializer.GetInt(_key, EnumUnion.TtoV( defaultValue )) );
-		}
+
+		_value      = EV.VtoT( SGS.Serializer.GetInt(_key, EV.TtoV( defaultValue )) );
 	}
 
-	private	String	_key;
-	private	T		_default;
-	private	T		_value;
-	
-	public	Boolean	HasValue => SGS.Serializer.HasKey( _key );
+	private	readonly	String	_key;
+	private	readonly	T		_default;
+	private				T		_value;
 
-	public event	Action<T> Changed;
+	public event		Action<T> Changed;
 	
-	public T Get	( )
+	public	Boolean	HasValue	=> SGS.Serializer.HasKey( _key );
+	
+	public	T		Get			( )
 	{ 
 		return _value;
 	}
-	public void Set	( T value )
+	public	void	Set			( T value )
 	{ 
 		if ( value.CompareTo( _value ) == 0 )
 			return;
 
 		_value = value;
-		var isInt64 = Enum.GetUnderlyingType(typeof(T)) == typeof(Int64);
-		
-		if (isInt64)
-		{
-			var raw		= EnumUnion.TtoV64( value );
-			SGS.Serializer.SetInt(_key+"_Low", (Int32)raw);
-			SGS.Serializer.SetInt(_key+"_High", (Int32)(raw>>32) );
-		}
-		else
-		{
-			SGS.Serializer.SetInt( _key, EnumUnion.TtoV(value) );
-		}
+		SGS.Serializer.SetInt( _key, EV.TtoV(value) );
 
 		try						{ Changed?.Invoke( value ); }
 		catch (Exception ex)	{ Debug.LogException( ex ); }
 	}
-	public void Clear() => Set( _default );
+	public	void	SetDefault	( ) => Set( _default );
 
-	public static	implicit operator T ( EnumSetting<T> @this ) => @this._value;
+	public static	implicit operator T ( Enum32Setting<T> @this ) => @this._value;
+
+	[StructLayout(LayoutKind.Explicit)]
+	private ref struct EV
+	{
+		[FieldOffset(0)] public T		Enum;
+		[FieldOffset(0)] public Int32	Value;
+	
+		public static	Int32	TtoV( T t )			=> new EV { Enum = t }.Value;
+		public static	T		VtoT( Int32 v )		=> new EV { Value = v }.Enum;
+	}
 }
-public interface IClearable{ public void Clear( ); }
+public interface IClearable{ public void SetDefault( ); }

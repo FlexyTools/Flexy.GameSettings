@@ -2,7 +2,7 @@
 
 public struct StringSetting
 {
-	public StringSetting (String key, String defaultValue)
+	public StringSetting ( String key, String defaultValue )
 	{
 		_key     = key;
 		_default = defaultValue;
@@ -10,19 +10,19 @@ public struct StringSetting
 		Changed  = null;
 	}
 
-	private String _key;
-	private String _default;
-	private String _value; 
+	private readonly 	String	_key;
+	private readonly 	String	_default;
+	private				String	_value; 
 	
 	public event Action<String> Changed;
 
-	public Boolean HasValue => SGS.Serializer.HasKey( _key );
+	public	Boolean	HasValue	=> SGS.Serializer.HasKey( _key );
 
-	public String Get	( )
+	public	String	Get			( )
 	{ 
 		return _value;
 	}
-	public void Set	( String value )
+	public	void	Set			( String value )
 	{ 
 		if(_value == value)
 			return;
@@ -33,7 +33,7 @@ public struct StringSetting
 		try						{ Changed?.Invoke( value ); }
 		catch (Exception ex)	{ Debug.LogException( ex ); }
 	}
-	public void Clear() => Set( _default );
+	public	void	SetDefault	( ) => Set( _default );
 
 	public static	implicit operator String ( StringSetting @this ) => @this._value;
 }

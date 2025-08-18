@@ -2,7 +2,7 @@
 
 public struct BooleanSetting
 {
-	public BooleanSetting (String key, Boolean defaultValue)
+	public BooleanSetting ( String key, Boolean defaultValue )
 	{
 		_key     = "Flexy.GameSettings  Boolean " + key;
 		_default = defaultValue;
@@ -10,17 +10,16 @@ public struct BooleanSetting
 		Changed  = null;
 	}
 
-	private String  _key;
-	private Boolean _default; 
-	private Boolean _value; 
+	private readonly	String  _key;
+	private readonly	Boolean _default; 
+	private				Boolean	_value; 
 	
 	public event Action<Boolean> Changed;
 
-	public Boolean HasValue => SGS.Serializer.HasKey( _key );
+	public Boolean	HasValue	=> SGS.Serializer.HasKey( _key );
 
-	public Boolean	Get		( ) => _value;
-
-	public void		Set		( Boolean value )
+	public Boolean	Get			( ) => _value;
+	public void		Set			( Boolean value )
 	{ 
 		if (_value == value )
 			return;
@@ -31,7 +30,7 @@ public struct BooleanSetting
 		try						{ Changed?.Invoke( value ); }
 		catch (Exception ex)	{ Debug.LogException( ex ); }
 	}
-	public void		Clear	( ) => Set( _default );
+	public void		SetDefault	( ) => Set( _default );
 
 	public static	implicit operator Boolean ( BooleanSetting @this ) => @this._value;
 }

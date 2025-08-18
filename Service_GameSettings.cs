@@ -1,15 +1,13 @@
 ﻿namespace Flexy.GameSettings
 {
-	public class Service_GameSettings : MonoBehaviour, IService
+	public class Service_GameSettings : MonoBehaviour
 	{
 		public static SerializerImpl _serializerImpl;
 		public static SerializerImpl Serializer => _serializerImpl ??= new( );
 		
 		private readonly List<GameSettingsTab> _settings = new( );
 		
-		public void OrderedInit(GameContext ctx) { }
-		
-		public T Get<T>( ) where T:GameSettingsTab, new() 
+		public	T		Get<T>		( ) where T:GameSettingsTab, new() 
 		{
 			foreach (var s in _settings)
 			{
@@ -23,11 +21,11 @@
 			return result;
 		}
 		
-		[ContextMenu("Restore Defaults")]
-		public 			void		ClearGameSettings				(  )
+		[ContextMenu("Reset To Defaults")]
+		public	void	ResetToDefaults	( )	
 		{
 			foreach ( var ss in _settings ) 
-				ss.Clear( );
+				ss.SetDefault( );
 		}
 
 		public class  SerializerImpl
@@ -47,22 +45,36 @@
 			public virtual	Boolean HasKey		( String key )						=> PlayerPrefs.HasKey		( key );
 			public virtual	void	ClearKey	( String key )						=> PlayerPrefs.DeleteKey	( key );
 		}
+		
+		#if UNITY_EDITOR
+		[UnityEditor.MenuItem("Tools/Fun.Flexy/Game Settings/Reset To Defaults")]
+		private static	void	Editor_ResetToDefaults	( )		
+		{
+			var service = FindAnyObjectByType<Service_GameSettings>();
+			service.ResetToDefaults();
+		}
+		[UnityEditor.MenuItem("Tools/Fun.Flexy/Game Settings/Clear All Prefs")]
+		private static	void	Editor_ClearAllPrefs	( )		
+		{
+			PlayerPrefs.DeleteAll();
+		}
+		#endif
 	}
 	
 	public abstract class GameSettingsTab
 	{
-		public void Clear ( )
+		public void SetDefault ( )
 		{
 			foreach (var field in GetType().GetFields())
 			{
 				var settingVal = field.GetValue(this);  
 				switch (settingVal)
 				{
-					case BooleanSetting s:	s.Clear( ); break;
-					case Int32Setting s:	s.Clear( ); break;
-					case SingleSetting s:	s.Clear( ); break;
-					case StringSetting s:	s.Clear( ); break;
-					case IClearable s:		s.Clear( ); break;
+					case BooleanSetting s:	s.SetDefault( ); break;
+					case Int32Setting s:	s.SetDefault( ); break;
+					case SingleSetting s:	s.SetDefault( ); break;
+					case StringSetting s:	s.SetDefault( ); break;
+					case IClearable s:		s.SetDefault( ); break;
 				}
 			}
 		}

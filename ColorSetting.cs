@@ -4,7 +4,7 @@ namespace Flexy.GameSettings;
 
 public struct ColorSetting : IClearable
 {
-	public ColorSetting (String key, Color32 defaultValue) 
+	public ColorSetting ( String key, Color32 defaultValue ) 
 	{
 		_key     = "Flexy.GameSettings  Color " + key;
 		_default = defaultValue;
@@ -13,17 +13,16 @@ public struct ColorSetting : IClearable
 		Changed  = null;
 	}
 
-	private readonly String _key;
-	private readonly Color32  _default;
-	private          Color32  _value; 
+	private readonly	String		_key;
+	private readonly	Color32		_default;
+	private				Color32		_value; 
 	
-	public event Action<Color32> Changed;
+	public event Action<Color32>	Changed;
 
-	public Boolean	HasValue => SGS.Serializer.HasKey( _key );
+	public	Boolean		HasValue	=> SGS.Serializer.HasKey( _key );
 
-	public void		Clear	( ) => Set( _default );
-	public Color32	Get		( ) => _value;
-	public void		Set		( Color32 value )
+	public	Color32		Get			( ) => _value;
+	public	void		Set			( Color32 value )
 	{ 
 		if (_value.Equals(value) )
 			return;
@@ -34,6 +33,7 @@ public struct ColorSetting : IClearable
 		try						{ Changed?.Invoke( value ); }
 		catch (Exception ex)	{ Debug.LogException( ex ); }
 	}
+	public	void		SetDefault	( ) => Set( _default );
 	
 	public static	implicit operator Color32	( ColorSetting @this ) => @this._value;
 	public static	implicit operator Color		( ColorSetting @this ) => @this._value;

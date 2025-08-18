@@ -2,7 +2,7 @@
 
 public struct SingleSetting
 {
-	public SingleSetting (String key, Single defaultValue)
+	public SingleSetting ( String key, Single defaultValue )
 	{
 		_key     = key;
 		_default = defaultValue;
@@ -10,19 +10,19 @@ public struct SingleSetting
 		Changed  = null;
 	}
 
-	private readonly	String _key;
-	private				Single _default;
-	private				Single _value; 
+	private readonly	String	_key;
+	private	readonly	Single	_default;
+	private				Single	_value; 
 	
 	public event Action<Single> Changed;
 
-	public Boolean HasValue => SGS.Serializer.HasKey( _key );
+	public	Boolean	HasValue	=> SGS.Serializer.HasKey( _key );
 
-	public Single Get	( )
+	public	Single	Get			( )
 	{ 
 		return _value;
 	}
-	public void Set	( Single value )
+	public	void	Set			( Single value )
 	{ 
 		if(_value == value)
 			return;
@@ -33,7 +33,7 @@ public struct SingleSetting
 		try						{ Changed?.Invoke( value ); }
 		catch (Exception ex)	{ Debug.LogException( ex ); }
 	}
-	public void Clear() => Set( _default );
+	public	void	SetDefault	( ) => Set( _default );
 
 	public static	implicit operator Single ( SingleSetting @this ) => @this._value;
 }
