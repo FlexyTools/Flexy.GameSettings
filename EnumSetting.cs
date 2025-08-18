@@ -14,13 +14,13 @@ public		struct EnumSetting<T> : IClearable where T: unmanaged, Enum, IComparable
 		{
 			var raw		= EnumUnion.TtoV64( defaultValue );
 			_value      = EnumUnion.VtoT<T>(	
-							(Int64)GSS.Serializer.GetInt(_key+"_Low", (Int32)raw) |
-							(Int64)GSS.Serializer.GetInt(_key+"_High", (Int32)(raw>>32) ) << 32
+							(Int64)SGS.Serializer.GetInt(_key+"_Low", (Int32)raw) |
+							(Int64)SGS.Serializer.GetInt(_key+"_High", (Int32)(raw>>32) ) << 32
 						);
 		}
 		else
 		{
-			_value      = EnumUnion.VtoT<T>( GSS.Serializer.GetInt(_key, EnumUnion.TtoV( defaultValue )) );
+			_value      = EnumUnion.VtoT<T>( SGS.Serializer.GetInt(_key, EnumUnion.TtoV( defaultValue )) );
 		}
 	}
 
@@ -28,7 +28,7 @@ public		struct EnumSetting<T> : IClearable where T: unmanaged, Enum, IComparable
 	private	T		_default;
 	private	T		_value;
 	
-	public	Boolean	HasValue => GSS.Serializer.HasKey( _key );
+	public	Boolean	HasValue => SGS.Serializer.HasKey( _key );
 
 	public event	Action<T> Changed;
 	
@@ -47,12 +47,12 @@ public		struct EnumSetting<T> : IClearable where T: unmanaged, Enum, IComparable
 		if (isInt64)
 		{
 			var raw		= EnumUnion.TtoV64( value );
-			GSS.Serializer.SetInt(_key+"_Low", (Int32)raw);
-			GSS.Serializer.SetInt(_key+"_High", (Int32)(raw>>32) );
+			SGS.Serializer.SetInt(_key+"_Low", (Int32)raw);
+			SGS.Serializer.SetInt(_key+"_High", (Int32)(raw>>32) );
 		}
 		else
 		{
-			GSS.Serializer.SetInt( _key, EnumUnion.TtoV(value) );
+			SGS.Serializer.SetInt( _key, EnumUnion.TtoV(value) );
 		}
 
 		try						{ Changed?.Invoke( value ); }

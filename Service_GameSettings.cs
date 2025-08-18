@@ -1,6 +1,6 @@
 ﻿namespace Flexy.GameSettings
 {
-	public class GameSettingsService : MonoBehaviour, IService
+	public class Service_GameSettings : MonoBehaviour, IService
 	{
 		public static SerializerImpl _serializerImpl;
 		public static SerializerImpl Serializer => _serializerImpl ??= new( );

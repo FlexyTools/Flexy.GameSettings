@@ -8,7 +8,7 @@ public struct ColorSetting : IClearable
 	{
 		_key     = "Flexy.GameSettings  Color " + key;
 		_default = defaultValue;
-		var raw	 = GSS.Serializer.GetInt(_key, UnsafeUtility.As<Color32, Int32>(ref _default));
+		var raw	 = SGS.Serializer.GetInt(_key, UnsafeUtility.As<Color32, Int32>(ref _default));
 		_value   = UnsafeUtility.As<Int32, Color32>(ref raw);
 		Changed  = null;
 	}
@@ -19,7 +19,7 @@ public struct ColorSetting : IClearable
 	
 	public event Action<Color32> Changed;
 
-	public Boolean	HasValue => GSS.Serializer.HasKey( _key );
+	public Boolean	HasValue => SGS.Serializer.HasKey( _key );
 
 	public void		Clear	( ) => Set( _default );
 	public Color32	Get		( ) => _value;
@@ -29,7 +29,7 @@ public struct ColorSetting : IClearable
 			return;
 
 		_value = value;
-		GSS.Serializer.SetInt(_key, UnsafeUtility.As<Color32, Int32>(ref _value) );
+		SGS.Serializer.SetInt(_key, UnsafeUtility.As<Color32, Int32>(ref _value) );
 
 		try						{ Changed?.Invoke( value ); }
 		catch (Exception ex)	{ Debug.LogException( ex ); }
