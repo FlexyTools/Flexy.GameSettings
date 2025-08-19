@@ -2,12 +2,12 @@
 
 public struct BooleanSetting
 {
-	public BooleanSetting ( String key, Boolean defaultValue )
+	public	BooleanSetting	( String key, Boolean defaultValue, Boolean readLater = false )
 	{
-		_key     = "Flexy.GameSettings  Boolean " + key;
-		_default = defaultValue;
-		_value   = SGS.Serializer.GetBool(_key, defaultValue );
-		Changed  = null;
+		_key		= "Flexy.GameSettings  Boolean " + key;
+		_default	= defaultValue;
+		_value		= readLater ? _default : SGS.Serializer.GetBool( _key, defaultValue );
+		Changed		= null;
 	}
 
 	private readonly	String  _key;
@@ -19,6 +19,7 @@ public struct BooleanSetting
 	public Boolean	HasValue	=> SGS.Serializer.HasKey( _key );
 
 	public Boolean	Get			( ) => _value;
+	public Boolean	Read		( ) => _value = SGS.Serializer.GetBool( _key, _default );
 	public void		Set			( Boolean value )
 	{ 
 		if (_value == value )
