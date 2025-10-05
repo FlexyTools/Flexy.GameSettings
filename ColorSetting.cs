@@ -2,7 +2,7 @@ using Unity.Collections.LowLevel.Unsafe;
 
 namespace Flexy.GameSettings;
 
-public struct ColorSetting : IClearable
+public struct ColorSetting
 {
 	public ColorSetting ( String key, Color32 defaultValue ) 
 	{
@@ -24,16 +24,16 @@ public struct ColorSetting : IClearable
 	public	Color32		Get			( ) => _value;
 	public	void		Set			( Color32 value )
 	{ 
-		if (_value.Equals(value) )
+		if (_value.Equals(value))
 			return;
 
 		_value = value;
-		SGS.Serializer.SetInt(_key, UnsafeUtility.As<Color32, Int32>(ref _value) );
+		SGS.Serializer.SetInt(_key, UnsafeUtility.As<Color32, Int32>(ref _value));
 
-		try						{ Changed?.Invoke( value ); }
-		catch (Exception ex)	{ Debug.LogException( ex ); }
+		try						{ Changed?.Invoke(value); }
+		catch (Exception ex)	{ Debug.LogException(ex); }
 	}
-	public	void		SetDefault	( ) => Set( _default );
+	public	void		SetDefault	( ) => Set(_default);
 	
 	public static	implicit operator Color32	( ColorSetting @this ) => @this._value;
 	public static	implicit operator Color		( ColorSetting @this ) => @this._value;

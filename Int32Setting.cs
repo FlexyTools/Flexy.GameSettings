@@ -16,7 +16,7 @@ public struct Int32Setting
 	
 	public event Action<Int32> Changed;
 
-	public	Boolean HasValue	=> SGS.Serializer.HasKey( _key );
+	public	Boolean HasValue	=> SGS.Serializer.HasKey(_key);
 
 	public	Int32	Get			( )
 	{ 
@@ -24,16 +24,16 @@ public struct Int32Setting
 	}
 	public	void	Set			( Int32 value )
 	{ 
-		if (_value == value )
+		if (_value == value)
 			return;
 
 		_value = value;
 		SGS.Serializer.SetInt(_key, value);
 
-		try						{ Changed?.Invoke( value ); }
-		catch (Exception ex)	{ Debug.LogException( ex ); }
+		try						{ Changed?.Invoke(value); }
+		catch (Exception ex)	{ Debug.LogException(ex); }
 	}
-	public	void	SetDefault	( ) => Set( _default );
+	public	void	SetDefault	( ) => Set(_default);
 	
 	public static	implicit operator Int32 ( Int32Setting @this ) => @this._value;
 }

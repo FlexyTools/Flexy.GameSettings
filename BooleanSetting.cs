@@ -6,7 +6,7 @@ public struct BooleanSetting
 	{
 		_key		= "Flexy.GameSettings  Boolean " + key;
 		_default	= defaultValue;
-		_value		= readLater ? _default : SGS.Serializer.GetBool( _key, defaultValue );
+		_value		= readLater ? _default : SGS.Serializer.GetBool(_key, defaultValue);
 		Changed		= null;
 	}
 
@@ -16,22 +16,22 @@ public struct BooleanSetting
 	
 	public event Action<Boolean> Changed;
 
-	public Boolean	HasValue	=> SGS.Serializer.HasKey( _key );
+	public Boolean	HasValue	=> SGS.Serializer.HasKey(_key);
 
 	public Boolean	Get			( ) => _value;
-	public Boolean	Read		( ) => _value = SGS.Serializer.GetBool( _key, _default );
+	public Boolean	Read		( ) => _value = SGS.Serializer.GetBool(_key, _default);
 	public void		Set			( Boolean value )
 	{ 
 		if (_value == value )
 			return;
 
 		_value = value;
-		SGS.Serializer.SetBool(_key, value );
+		SGS.Serializer.SetBool(_key, value);
 
-		try						{ Changed?.Invoke( value ); }
-		catch (Exception ex)	{ Debug.LogException( ex ); }
+		try						{ Changed?.Invoke(value); }
+		catch (Exception ex)	{ Debug.LogException(ex); }
 	}
-	public void		SetDefault	( ) => Set( _default );
+	public void		SetDefault	( ) => Set(_default);
 
 	public static	implicit operator Boolean ( BooleanSetting @this ) => @this._value;
 }

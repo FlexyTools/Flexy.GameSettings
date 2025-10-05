@@ -16,7 +16,7 @@ public struct StringSetting
 	
 	public event Action<String> Changed;
 
-	public	Boolean	HasValue	=> SGS.Serializer.HasKey( _key );
+	public	Boolean	HasValue	=> SGS.Serializer.HasKey(_key);
 
 	public	String	Get			( )
 	{ 
@@ -24,16 +24,16 @@ public struct StringSetting
 	}
 	public	void	Set			( String value )
 	{ 
-		if(_value == value)
+		if (_value == value)
 			return;
 		
 		_value = value;
 		SGS.Serializer.SetString(_key, value);
 
-		try						{ Changed?.Invoke( value ); }
-		catch (Exception ex)	{ Debug.LogException( ex ); }
+		try						{ Changed?.Invoke(value); }
+		catch (Exception ex)	{ Debug.LogException(ex); }
 	}
-	public	void	SetDefault	( ) => Set( _default );
+	public	void	SetDefault	( ) => Set(_default);
 
 	public static	implicit operator String ( StringSetting @this ) => @this._value;
 }

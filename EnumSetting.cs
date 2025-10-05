@@ -10,7 +10,7 @@ public	struct Enum32Setting<T> : IClearable where T: unmanaged, Enum, IComparabl
 		_default    = defaultValue;
 		Changed		= null;
 
-		_value      = EV.VtoT( SGS.Serializer.GetInt(_key, EV.TtoV( defaultValue )) );
+		_value      = Ev.VtoT( SGS.Serializer.GetInt(_key, Ev.TtoV( defaultValue )) );
 	}
 
 	private	readonly	String	_key;
@@ -19,7 +19,7 @@ public	struct Enum32Setting<T> : IClearable where T: unmanaged, Enum, IComparabl
 
 	public event		Action<T> Changed;
 	
-	public	Boolean	HasValue	=> SGS.Serializer.HasKey( _key );
+	public	Boolean	HasValue	=> SGS.Serializer.HasKey(_key);
 	
 	public	T		Get			( )
 	{ 
@@ -27,27 +27,27 @@ public	struct Enum32Setting<T> : IClearable where T: unmanaged, Enum, IComparabl
 	}
 	public	void	Set			( T value )
 	{ 
-		if ( value.CompareTo( _value ) == 0 )
+		if (value.CompareTo( _value ) == 0)
 			return;
 
 		_value = value;
-		SGS.Serializer.SetInt( _key, EV.TtoV(value) );
+		SGS.Serializer.SetInt(_key, Ev.TtoV(value));
 
-		try						{ Changed?.Invoke( value ); }
-		catch (Exception ex)	{ Debug.LogException( ex ); }
+		try						{ Changed?.Invoke(value); }
+		catch (Exception ex)	{ Debug.LogException(ex); }
 	}
-	public	void	SetDefault	( ) => Set( _default );
+	public	void	SetDefault	( ) => Set(_default);
 
 	public static	implicit operator T ( Enum32Setting<T> @this ) => @this._value;
 
 	[StructLayout(LayoutKind.Explicit)]
-	private ref struct EV
+	private ref struct Ev
 	{
 		[FieldOffset(0)] public T		Enum;
 		[FieldOffset(0)] public Int32	Value;
 	
-		public static	Int32	TtoV( T t )			=> new EV { Enum = t }.Value;
-		public static	T		VtoT( Int32 v )		=> new EV { Value = v }.Enum;
+		public static	Int32	TtoV( T t )			=> new Ev { Enum = t }.Value;
+		public static	T		VtoT( Int32 v )		=> new Ev { Value = v }.Enum;
 	}
 }
 public interface IClearable{ public void SetDefault( ); }

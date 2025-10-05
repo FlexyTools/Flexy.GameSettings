@@ -16,7 +16,7 @@ public struct SingleSetting
 	
 	public event Action<Single> Changed;
 
-	public	Boolean	HasValue	=> SGS.Serializer.HasKey( _key );
+	public	Boolean	HasValue	=> SGS.Serializer.HasKey(_key);
 
 	public	Single	Get			( )
 	{ 
@@ -24,16 +24,16 @@ public struct SingleSetting
 	}
 	public	void	Set			( Single value )
 	{ 
-		if(_value == value)
+		if (_value == value)
 			return;
 
 		_value = value;
 		SGS.Serializer.SetFloat(_key, value);
 		
-		try						{ Changed?.Invoke( value ); }
-		catch (Exception ex)	{ Debug.LogException( ex ); }
+		try						{ Changed?.Invoke(value); }
+		catch (Exception ex)	{ Debug.LogException(ex); }
 	}
-	public	void	SetDefault	( ) => Set( _default );
+	public	void	SetDefault	( ) => Set(_default);
 
 	public static	implicit operator Single ( SingleSetting @this ) => @this._value;
 }
