@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 
 namespace Flexy.GameSettings;
 
@@ -50,4 +50,3 @@ public	struct Enum32Setting<T> : IClearable where T: unmanaged, Enum, IComparabl
 		public static	T		VtoT( Int32 v )		=> new Ev { Value = v }.Enum;
 	}
 }
-public interface IClearable{ public void SetDefault( ); }

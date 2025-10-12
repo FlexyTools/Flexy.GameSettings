@@ -80,4 +80,6 @@
 			}
 		}
 	}
+	
+	public interface IClearable{ public void SetDefault( ); }
 }
