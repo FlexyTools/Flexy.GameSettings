@@ -16,7 +16,7 @@ public struct ColorSetting
 	private readonly	Color32		_default;
 	private				Color32		_value; 
 	
-	public event Action<Color32>	Changed;
+	public event Action<Color32>?	Changed;
 
 	public	Boolean		HasValue	=> SGS.Serializer.HasKey( _key );
 

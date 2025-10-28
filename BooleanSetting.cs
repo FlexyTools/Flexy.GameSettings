@@ -10,17 +10,17 @@ public struct BooleanSetting
 		Changed		= null;
 	}
 
-	private readonly	String  _key;
-	private readonly	Boolean _default; 
-	private				Boolean	_value; 
+	private readonly	String		_key;
+	private readonly	Boolean		_default; 
+	private				Boolean		_value; 
 	
-	public event Action<Boolean> Changed;
+	public event Action<Boolean>?	Changed;
 
-	public Boolean	HasValue	=> SGS.Serializer.HasKey(_key);
+	public	Boolean		HasValue	=> SGS.Serializer.HasKey(_key);
 
-	public Boolean	Read		( ) => _value = SGS.Serializer.GetBool(_key, _default);
-	public Boolean	Get			( ) => _value;
-	public void		Set			( Boolean value )
+	public	Boolean		Read		( ) => _value = SGS.Serializer.GetBool(_key, _default);
+	public	Boolean		Get			( ) => _value;
+	public	void		Set			( Boolean value )
 	{ 
 		if (_value == value )
 			return;
@@ -31,7 +31,7 @@ public struct BooleanSetting
 		try						{ Changed?.Invoke(value); }
 		catch (Exception ex)	{ Debug.LogException(ex); }
 	}
-	public void		SetDefault	( ) => Set(_default);
+	public	void		SetDefault	( ) => Set(_default);
 
 	public static	implicit operator Boolean ( BooleanSetting @this ) => @this._value;
 }

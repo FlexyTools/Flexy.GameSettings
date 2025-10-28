@@ -1,6 +1,6 @@
 {
   "name": "fun.flexy.gamesettings",
-  "displayName": "Flexy Game Settings",
+  "displayName": "Flexy GameSettings",
   "version": "5.0.0",
   "unity": "2022.3",
   "description": "Easy to use game settings system",

@@ -16,7 +16,7 @@ public	struct Enum32Setting<T> : IClearable where T: unmanaged, Enum, IComparabl
 	private	readonly	T		_default;
 	private				T		_value;
 
-	public event		Action<T> Changed;
+	public event Action<T>?		Changed;
 	
 	public	Boolean	HasValue	=> SGS.Serializer.HasKey(_key);
 	
@@ -47,6 +47,6 @@ public	struct Enum32Setting<T> : IClearable where T: unmanaged, Enum, IComparabl
 		[FieldOffset(0)] public Int32	Value;
 	
 		public static	Int32	TtoV( T t )			=> new Ev { Enum = t }.Value;
-		public static	T		VtoT( Int32 v )		=> new Ev { Value = v }.Enum;
+		public static	T		VtoT( Int32 v )		=> new Ev { Value = v }.Enum!;
 	}
 }

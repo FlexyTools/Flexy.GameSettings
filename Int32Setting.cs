@@ -10,11 +10,11 @@ public struct Int32Setting
 		Changed  = null;
 	}
 
-	private readonly	String _key;
-	private readonly	Int32  _default;
-	private				Int32  _value; 
+	private readonly	String	_key;
+	private readonly	Int32	_default;
+	private				Int32	_value; 
 	
-	public event Action<Int32> Changed;
+	public event Action<Int32>?	Changed;
 
 	public	Boolean HasValue	=> SGS.Serializer.HasKey(_key);
 

@@ -14,7 +14,7 @@ public struct SingleSetting
 	private	readonly	Single	_default;
 	private				Single	_value; 
 	
-	public event Action<Single> Changed;
+	public event Action<Single>? Changed;
 
 	public	Boolean	HasValue	=> SGS.Serializer.HasKey(_key);
 

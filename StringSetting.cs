@@ -14,7 +14,7 @@ public struct StringSetting
 	private readonly 	String	_default;
 	private				String	_value; 
 	
-	public event Action<String> Changed;
+	public event Action<String>? Changed;
 
 	public	Boolean	HasValue	=> SGS.Serializer.HasKey(_key);
 

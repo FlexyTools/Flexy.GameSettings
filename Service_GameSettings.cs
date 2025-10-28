@@ -2,8 +2,7 @@
 {
 	public class Service_GameSettings : MonoBehaviour
 	{
-		public static SerializerImpl _serializerImpl;
-		public static SerializerImpl Serializer => _serializerImpl ??= new();
+		public static SettingsSerializer Serializer = new();
 		
 		private readonly List<GameSettingsTab> _settings = new();
 		
@@ -28,7 +27,7 @@
 				ss.SetDefault();
 		}
 
-		public class  SerializerImpl
+		public class  SettingsSerializer
 		{
 			public 			Boolean	GetBool		( String key, Boolean defaultValue )=> GetInt	(key, defaultValue ? 1 : 0) != 0;
 			public 			void	SetBool		( String key, Boolean value )		=> SetInt	(key, value ? 1 : 0);
