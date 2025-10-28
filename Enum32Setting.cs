@@ -4,13 +4,12 @@ namespace Flexy.GameSettings;
 
 public	struct Enum32Setting<T> : IClearable where T: unmanaged, Enum, IComparable
 {
-	public Enum32Setting ( String key, T defaultValue )
+	public Enum32Setting ( String key, T defaultValue, Boolean readLater = false )
 	{
 		_key        = $"Flexy.GameSettings  Enum {typeof(T).Name} " + key;
 		_default    = defaultValue;
+		_value      = readLater ? _default : Ev.VtoT( SGS.Serializer.GetInt(_key, Ev.TtoV( defaultValue )) );
 		Changed		= null;
-
-		_value      = Ev.VtoT( SGS.Serializer.GetInt(_key, Ev.TtoV( defaultValue )) );
 	}
 
 	private	readonly	String	_key;
@@ -21,6 +20,7 @@ public	struct Enum32Setting<T> : IClearable where T: unmanaged, Enum, IComparabl
 	
 	public	Boolean	HasValue	=> SGS.Serializer.HasKey(_key);
 	
+	public	T		Read		( ) => _value = Ev.VtoT( SGS.Serializer.GetInt(_key, Ev.TtoV( _default )) );
 	public	T		Get			( )
 	{ 
 		return _value;

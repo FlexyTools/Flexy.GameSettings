@@ -18,8 +18,8 @@ public struct BooleanSetting
 
 	public Boolean	HasValue	=> SGS.Serializer.HasKey(_key);
 
-	public Boolean	Get			( ) => _value;
 	public Boolean	Read		( ) => _value = SGS.Serializer.GetBool(_key, _default);
+	public Boolean	Get			( ) => _value;
 	public void		Set			( Boolean value )
 	{ 
 		if (_value == value )

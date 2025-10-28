@@ -2,11 +2,11 @@
 
 public struct Int32Setting
 {
-	public Int32Setting ( String key, Int32 defaultValue )
+	public Int32Setting ( String key, Int32 defaultValue, Boolean readLater = false )
 	{
 		_key     = "Flexy.GameSettings  Int " + key;
 		_default = defaultValue;
-		_value   = SGS.Serializer.GetInt(_key, _default);
+		_value   = readLater ? _default : SGS.Serializer.GetInt(_key, _default);
 		Changed  = null;
 	}
 
@@ -18,6 +18,7 @@ public struct Int32Setting
 
 	public	Boolean HasValue	=> SGS.Serializer.HasKey(_key);
 
+	public	Int32	Read		( ) => _value = SGS.Serializer.GetInt(_key, _default);
 	public	Int32	Get			( )
 	{ 
 		return _value;

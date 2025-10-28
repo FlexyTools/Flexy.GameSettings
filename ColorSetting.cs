@@ -4,13 +4,12 @@ namespace Flexy.GameSettings;
 
 public struct ColorSetting
 {
-	public ColorSetting ( String key, Color32 defaultValue ) 
+	public ColorSetting ( String key, Color32 defaultValue, Boolean readLater = false ) 
 	{
-		_key     = "Flexy.GameSettings  Color " + key;
-		_default = defaultValue;
-		var raw	 = SGS.Serializer.GetInt(_key, UnsafeUtility.As<Color32, Int32>(ref _default));
-		_value   = UnsafeUtility.As<Int32, Color32>(ref raw);
-		Changed  = null;
+		_key		= "Flexy.GameSettings  Color " + key;
+		_default	= defaultValue;
+		_value		= readLater ? _default : ReadValue(_key, defaultValue);
+		Changed		= null;
 	}
 
 	private readonly	String		_key;
@@ -21,6 +20,7 @@ public struct ColorSetting
 
 	public	Boolean		HasValue	=> SGS.Serializer.HasKey( _key );
 
+	public	Color32		Read		( ) => _value = ReadValue(_key, _default);
 	public	Color32		Get			( ) => _value;
 	public	void		Set			( Color32 value )
 	{ 
@@ -37,4 +37,10 @@ public struct ColorSetting
 	
 	public static	implicit operator Color32	( ColorSetting @this ) => @this._value;
 	public static	implicit operator Color		( ColorSetting @this ) => @this._value;
+	
+	private static Color32	ReadValue	( String key, Color32 @default )	
+	{
+		var raw	 = SGS.Serializer.GetInt(key, UnsafeUtility.As<Color32, Int32>(ref @default));
+		return UnsafeUtility.As<Int32, Color32>(ref raw);
+	}
 }

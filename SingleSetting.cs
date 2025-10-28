@@ -2,11 +2,11 @@
 
 public struct SingleSetting
 {
-	public SingleSetting ( String key, Single defaultValue )
+	public SingleSetting ( String key, Single defaultValue, Boolean readLater = false )
 	{
 		_key     = key;
 		_default = defaultValue;
-		_value   = SGS.Serializer.GetFloat(_key, _default);
+		_value   = readLater ? _default : SGS.Serializer.GetFloat(_key, _default);
 		Changed  = null;
 	}
 
@@ -18,6 +18,7 @@ public struct SingleSetting
 
 	public	Boolean	HasValue	=> SGS.Serializer.HasKey(_key);
 
+	public	Single	Read		( ) => _value = SGS.Serializer.GetFloat(_key, _default);
 	public	Single	Get			( )
 	{ 
 		return _value;

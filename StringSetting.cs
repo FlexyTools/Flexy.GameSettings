@@ -2,11 +2,11 @@
 
 public struct StringSetting
 {
-	public StringSetting ( String key, String defaultValue )
+	public StringSetting ( String key, String defaultValue, Boolean readLater = false )
 	{
 		_key     = key;
 		_default = defaultValue;
-		_value   = SGS.Serializer.GetString(_key, _default);
+		_value   = readLater ? _default : SGS.Serializer.GetString(_key, _default);
 		Changed  = null;
 	}
 
@@ -18,6 +18,7 @@ public struct StringSetting
 
 	public	Boolean	HasValue	=> SGS.Serializer.HasKey(_key);
 
+	public	String	Read		( ) => _value = SGS.Serializer.GetString(_key, _default);
 	public	String	Get			( )
 	{ 
 		return _value;
