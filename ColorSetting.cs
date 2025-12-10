@@ -18,7 +18,7 @@ public struct ColorSetting
 	
 	public event Action<Color32>?	Changed;
 
-	public	Boolean		HasValue	=> SGS.Serializer.HasKey( _key );
+	public	Boolean		HasValue	=> SGS.Store.HasKey( _key );
 
 	public	Color32		Read		( ) => _value = ReadValue(_key, _default);
 	public	Color32		Get			( ) => _value;
@@ -28,7 +28,7 @@ public struct ColorSetting
 			return;
 
 		_value = value;
-		SGS.Serializer.SetInt(_key, UnsafeUtility.As<Color32, Int32>(ref _value));
+		SGS.Store.SetInt(_key, UnsafeUtility.As<Color32, Int32>(ref _value));
 
 		try						{ Changed?.Invoke(value); }
 		catch (Exception ex)	{ Debug.LogException(ex); }
@@ -40,7 +40,7 @@ public struct ColorSetting
 	
 	private static Color32	ReadValue	( String key, Color32 @default )	
 	{
-		var raw	 = SGS.Serializer.GetInt(key, UnsafeUtility.As<Color32, Int32>(ref @default));
+		var raw	 = SGS.Store.GetInt(key, UnsafeUtility.As<Color32, Int32>(ref @default));
 		return UnsafeUtility.As<Int32, Color32>(ref raw);
 	}
 }

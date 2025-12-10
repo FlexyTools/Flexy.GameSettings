@@ -6,7 +6,7 @@ public struct SingleSetting
 	{
 		_key     = key;
 		_default = defaultValue;
-		_value   = readLater ? _default : SGS.Serializer.GetFloat(_key, _default);
+		_value   = readLater ? _default : SGS.Store.GetFloat(_key, _default);
 		Changed  = null;
 	}
 
@@ -16,9 +16,9 @@ public struct SingleSetting
 	
 	public event Action<Single>? Changed;
 
-	public	Boolean	HasValue	=> SGS.Serializer.HasKey(_key);
+	public	Boolean	HasValue	=> SGS.Store.HasKey(_key);
 
-	public	Single	Read		( ) => _value = SGS.Serializer.GetFloat(_key, _default);
+	public	Single	Read		( ) => _value = SGS.Store.GetFloat(_key, _default);
 	public	Single	Get			( )
 	{ 
 		return _value;
@@ -29,7 +29,7 @@ public struct SingleSetting
 			return;
 
 		_value = value;
-		SGS.Serializer.SetFloat(_key, value);
+		SGS.Store.SetFloat(_key, value);
 		
 		try						{ Changed?.Invoke(value); }
 		catch (Exception ex)	{ Debug.LogException(ex); }

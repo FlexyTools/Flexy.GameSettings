@@ -2,7 +2,7 @@
 {
 	public class Service_GameSettings : MonoBehaviour
 	{
-		public static SettingsSerializer Serializer = new();
+		public static DataStore Store = new();
 		
 		private readonly List<GameSettingsTab> _settings = new();
 		
@@ -27,10 +27,10 @@
 				ss.SetDefault();
 		}
 
-		public class  SettingsSerializer
+		public class  DataStore
 		{
-			public 			Boolean	GetBool		( String key, Boolean defaultValue )=> GetInt	(key, defaultValue ? 1 : 0) != 0;
-			public 			void	SetBool		( String key, Boolean value )		=> SetInt	(key, value ? 1 : 0);
+			public virtual	Boolean	GetBool		( String key, Boolean defaultValue )=> GetInt	(key, defaultValue ? 1 : 0) != 0;
+			public virtual	void	SetBool		( String key, Boolean value )		=> SetInt	(key, value ? 1 : 0);
 			
 			public virtual	Int32	GetInt		( String key, Int32 defaultValue )	=> PlayerPrefs.GetInt		(key, defaultValue);
 			public virtual	void	SetInt		( String key, Int32 value )			=> PlayerPrefs.SetInt		(key, value);

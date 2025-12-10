@@ -6,7 +6,7 @@ public struct Int32Setting
 	{
 		_key     = "Flexy.GameSettings  Int " + key;
 		_default = defaultValue;
-		_value   = readLater ? _default : SGS.Serializer.GetInt(_key, _default);
+		_value   = readLater ? _default : SGS.Store.GetInt(_key, _default);
 		Changed  = null;
 	}
 
@@ -16,9 +16,9 @@ public struct Int32Setting
 	
 	public event Action<Int32>?	Changed;
 
-	public	Boolean HasValue	=> SGS.Serializer.HasKey(_key);
+	public	Boolean HasValue	=> SGS.Store.HasKey(_key);
 
-	public	Int32	Read		( ) => _value = SGS.Serializer.GetInt(_key, _default);
+	public	Int32	Read		( ) => _value = SGS.Store.GetInt(_key, _default);
 	public	Int32	Get			( )
 	{ 
 		return _value;
@@ -29,7 +29,7 @@ public struct Int32Setting
 			return;
 
 		_value = value;
-		SGS.Serializer.SetInt(_key, value);
+		SGS.Store.SetInt(_key, value);
 
 		try						{ Changed?.Invoke(value); }
 		catch (Exception ex)	{ Debug.LogException(ex); }

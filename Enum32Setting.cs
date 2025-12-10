@@ -8,7 +8,7 @@ public	struct Enum32Setting<T> : IClearable where T: unmanaged, Enum, IComparabl
 	{
 		_key        = $"Flexy.GameSettings  Enum {typeof(T).Name} " + key;
 		_default    = defaultValue;
-		_value      = readLater ? _default : Ev.VtoT( SGS.Serializer.GetInt(_key, Ev.TtoV( defaultValue )) );
+		_value      = readLater ? _default : Ev.VtoT( SGS.Store.GetInt(_key, Ev.TtoV( defaultValue )) );
 		Changed		= null;
 	}
 
@@ -18,9 +18,9 @@ public	struct Enum32Setting<T> : IClearable where T: unmanaged, Enum, IComparabl
 
 	public event Action<T>?		Changed;
 	
-	public	Boolean	HasValue	=> SGS.Serializer.HasKey(_key);
+	public	Boolean	HasValue	=> SGS.Store.HasKey(_key);
 	
-	public	T		Read		( ) => _value = Ev.VtoT( SGS.Serializer.GetInt(_key, Ev.TtoV( _default )) );
+	public	T		Read		( ) => _value = Ev.VtoT( SGS.Store.GetInt(_key, Ev.TtoV( _default )) );
 	public	T		Get			( )
 	{ 
 		return _value;
@@ -31,7 +31,7 @@ public	struct Enum32Setting<T> : IClearable where T: unmanaged, Enum, IComparabl
 			return;
 
 		_value = value;
-		SGS.Serializer.SetInt(_key, Ev.TtoV(value));
+		SGS.Store.SetInt(_key, Ev.TtoV(value));
 
 		try						{ Changed?.Invoke(value); }
 		catch (Exception ex)	{ Debug.LogException(ex); }

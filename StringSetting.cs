@@ -6,7 +6,7 @@ public struct StringSetting
 	{
 		_key     = key;
 		_default = defaultValue;
-		_value   = readLater ? _default : SGS.Serializer.GetString(_key, _default);
+		_value   = readLater ? _default : SGS.Store.GetString(_key, _default);
 		Changed  = null;
 	}
 
@@ -16,9 +16,9 @@ public struct StringSetting
 	
 	public event Action<String>? Changed;
 
-	public	Boolean	HasValue	=> SGS.Serializer.HasKey(_key);
+	public	Boolean	HasValue	=> SGS.Store.HasKey(_key);
 
-	public	String	Read		( ) => _value = SGS.Serializer.GetString(_key, _default);
+	public	String	Read		( ) => _value = SGS.Store.GetString(_key, _default);
 	public	String	Get			( )
 	{ 
 		return _value;
@@ -29,7 +29,7 @@ public struct StringSetting
 			return;
 		
 		_value = value;
-		SGS.Serializer.SetString(_key, value);
+		SGS.Store.SetString(_key, value);
 
 		try						{ Changed?.Invoke(value); }
 		catch (Exception ex)	{ Debug.LogException(ex); }
