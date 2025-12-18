@@ -1,4 +1,4 @@
-﻿![Img](https://github.com/user-attachments/assets/792efb83-33db-4c8c-8e92-2c8e5a363522)
+﻿![Img](https://raw.githubusercontent.com/FlexyTools/Flexy.Docs/main/Framework/Flexy.GameSettings/Src/Flexy.GameSettings.webp?token=GHSAT0AAAAAADQTQBIB7J7XYK54IHB5VYRA2KENXXQ)
 
 # Flexy.GameSettings
 
