@@ -10,9 +10,10 @@
 | 
 -->
 
-Easily store game settings for settings window or any other needs with just one line per setting.  
-By default it uses PlayerPrefs to store settings, but you can provide your own storage.  
-Easy extensible by defining settings tab classes.
+Easily store game settings for settings window or any other needs with just one line per setting    
+By default it uses PlayerPrefs to store settings, but you can provide your own storage  
+Easy extensible by defining settings tab classes  
+[Github](https://github.com/FlexyTools/Flexy.GameSettings) | [Docs](https://github.com/FlexyTools/Flexy.Docs/blob/main/Framework/Flexy.GameSettings/README.md)
 
 Supports:
 - String setting
@@ -81,7 +82,7 @@ _eulaAccepted.Read();
 
 ## Fully featured usage sample
 
-Flexy Template [Barley-Break](../../GameTemplates/Barley-Breaks/Readme.md)  
+Flexy Template [Barley-Break](https://github.com/FlexyTools/Flexy.Docs/tree/main/GameTemplates/Barley-Breaks)  
 
 ## Install
 
