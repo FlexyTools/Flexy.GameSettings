@@ -1,4 +1,4 @@
-﻿![Img](https://raw.githubusercontent.com/FlexyTools/Flexy.Docs/main/Framework/Flexy.GameSettings/Src/Flexy.GameSettings.webp?token=GHSAT0AAAAAADQTQBIB7J7XYK54IHB5VYRA2KENXXQ)
+﻿![Img](https://github.com/user-attachments/assets/6fe085dc-e2a2-49c6-a045-4e2bf6390302)
 
 # Flexy.GameSettings
 
@@ -10,8 +10,11 @@ Easy extensible by defining settings tab classes
 
 <!--[Github](https://github.com/FlexyTools/Flexy.GameSettings) |--> 
 [Docs](https://github.com/FlexyTools/Flexy.Docs/blob/main/Framework/Flexy.GameSettings/README.md) |
-[Unity Forum](link) |
+[Unity Forum](link) 
+<!--
+|
 [Asset Store](link)
+-->
 
 Supports:
 - String setting
@@ -77,10 +80,11 @@ and later in Enable, Awake or something call Read() to read and cache it for the
 ```csharp
 _eulaAccepted.Read();
 ```
-
+<!--
 ## Fully featured usage sample
 
 Flexy Template [Barley-Break](https://github.com/FlexyTools/Flexy.Docs/tree/main/GameTemplates/Barley-Breaks)  
+-->
 
 ## Install
 
