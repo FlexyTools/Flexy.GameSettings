@@ -9,7 +9,7 @@ By default it uses PlayerPrefs to store settings, but you can provide your own s
 Easy extensible by defining settings tab classes  
 
 <!--[Github](https://github.com/FlexyTools/Flexy.GameSettings) |--> 
-[Docs](https://github.com/FlexyTools/Flexy.Docs/blob/main/Framework/Flexy.GameSettings/README.md) |
+[Docs](https://github.com/FlexyTools/Flexy.Docs/blob/main/Framework/Flexy.GameSettings/Readme.md) |
 [Unity Forum](link) 
 <!--
 |
@@ -86,10 +86,15 @@ _eulaAccepted.Read();
 Flexy Template [Barley-Break](https://github.com/FlexyTools/Flexy.Docs/tree/main/GameTemplates/Barley-Breaks)  
 -->
 
-## Install
+### Install
 
 Open Unity Package Manager   
 Add package from git URL: https://github.com/FlexyTools/Flexy.GameSettings
+
+
+### Issues and Discussions
+
+File issues about the package or its docs in the [Docs](https://github.com/FlexyTools/Flexy.Docs/blob/main/Framework/Flexy.GameSettings/Readme.md) repo
 
 ### Have Fun
 
