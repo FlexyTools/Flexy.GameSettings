@@ -94,7 +94,7 @@ Add package from git URL: https://github.com/FlexyTools/Flexy.GameSettings
 
 ### Issues and Discussions
 
-File issues about the package or its docs in the [Docs](https://github.com/FlexyTools/Flexy.Docs/blob/main/Framework/Flexy.GameSettings/Readme.md) repo
+Please file any issues with documentation or packages in the [Flexy.Docs](https://github.com/FlexyTools/Flexy.Docs/blob/main/Framework/Flexy.GameSettings/Readme.md) repo
 
 ### Have Fun
 
