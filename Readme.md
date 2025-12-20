@@ -1,8 +1,9 @@
 ﻿![Img](https://github.com/user-attachments/assets/ebb66e52-7b73-46fd-95ab-3585a9a1180e)
 
-# Flexy.GameSettings
-
 [Flexy.Tools](https://github.com/FlexyTools/Flexy.Docs/tree/main) / [Framework](https://github.com/FlexyTools/Flexy.Docs/tree/main/Framework) / Flexy.GameSettings
+
+
+# Flexy.GameSettings
 
 Easily store game settings for settings window or any other needs with just one line per setting    
 By default it uses PlayerPrefs to store settings, but you can provide your own storage  
