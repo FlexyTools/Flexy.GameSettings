@@ -8,13 +8,10 @@ Easily store game settings for settings window or any other needs with just one 
 By default it uses PlayerPrefs to store settings, but you can provide your own storage  
 Easy extensible by defining settings tab classes  
 
-<!--[Github](https://github.com/FlexyTools/Flexy.GameSettings) |--> 
-[Docs](https://github.com/FlexyTools/Flexy.Docs/blob/main/Framework/Flexy.GameSettings/Readme.md) |
-[Unity Forum](link) 
-<!--
-|
-[Asset Store](link)
--->
+[Docs](https://github.com/FlexyTools/Flexy.Docs/blob/main/Framework/Flexy.GameSettings/Readme.md)
+| [Unity Forum](https://discussions.unity.com/t/flexy-gamesettings-free-easily-store-game-settings-with-just-one-line-per-setting/1700923) 
+| [Asset Store](https://u3d.as/3LKx)
+
 
 Supports:
 - String setting
